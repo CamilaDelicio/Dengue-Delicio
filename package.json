@@ -1,0 +1,25 @@
+{
+  "name": "dengue-facultad",
+  "version": "1.0.0",
+  "description": "1-inicializar proyecto npm init --yes\r 2-instalo dependencias npm install express morgan ejs mysql2 \r 3-\"type\":  \"module\" en package.json para  utilizar import de express\r 4- src con archivo server.js \r 5- levanto servidor  node src/server.js\r 6- app.set(\"port)",
+  "main": "paciente.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node src/server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "connect-flash": "^0.1.1",
+    "dotenv": "^16.4.5",
+    "ejs": "^3.1.10",
+    "express": "^4.21.1",
+    "express-mysql-session": "^3.0.3",
+    "express-session": "^1.18.1",
+    "morgan": "^1.10.0",
+    "mysql2": "^3.11.3"
+  }
+}

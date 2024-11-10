@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name=" viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesion</title>
+    <link rel="shortcut icon" href="../../../assets/Logo_Ministerio_de_Salud_-_Argentina.png" type="image/x-icon">
+    <link rel="stylesheet"  href="../../../css/styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Serif:ital,opsz,wght@0,8..144,100..900;1,8..144,100..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
+
+
+
+    
+</head>
+<body class="login-body">
+    <header>
+        <div class="logo">
+            <img src="../../../assets/logo-SantaRosa.png" alt="">
+        </div>
+        <nav>
+            <li>
+                <ul>
+                    <a href="#">Iniciar Sesion</a>
+                    <a href="/register">Registrarse</a>
+                </ul>
+            </li>
+        </nav>
+    </header>
+    <main>
+        <div class="Formulario-login">
+            <h1>Iniciar Sesión</h1>
+            <p>Ingrese sus datos:</p>
+            <form id="Login" action="/login" method="POST">
+                <label for="username" class="sr-only">Usuario</label>
+                <input type="text" name="username" id="username" placeholder="Nombre de usuario">
+                <label for="contraseña" class="sr-only">Contraseña</label>
+                <input type="password" name="password" id="password" placeholder="Ingrese contraseña">
+                <button type="submit">Iniciar Sesión</button>
+            </form>
+            
+                <br>
+                 <a href= "/register"  class="registrarme-link"> Registrarme</a></p>
+        </div>
+    
+    </main>
+    <footer>
+        <div class="conteiner-footer">
+            <div class="secciones">
+                <p>Enlaces</p>
+                <li>
+                    <ul>
+                        <li><a href="#"> Iniciar Sesión</a></a></li>
+                        <li><a href="/register"> Registrarse </a></li>
+                    </ul>
+                </li>
+            </div>
+            <div class="contacto">
+                <a href="https://maps.app.goo.gl/Z773iXjznfrX6dmP6" target="_blank">
+                    <img src="../../../assets/ubicacionSantarosa.png" alt="Ícono de Google Maps">
+                </a>
+                <a href="mailto:contacto@santarosamendoza.gob.ar" target="_blank">
+                    <img src="../../../assets/emailSantarosa(2).png" alt="Ícono de email">
+                </a>
+                <a class="iconoW" href="https://wa.me/+5492634332587" target="_blank">
+                    <img src="../../../assets/whatsappSantarosa.webp" alt="Ícono de Google Maps">
+                </a>
+            </div>
+            <div class="logofooter">
+                <img src="../../../assets/logo-SantaRosa.png" alt="">
+            </div>
+        </div>
+    </footer>
+    <% if (messages.success) { %>
+        <script>
+            alert("<%= messages.success %>");
+        </script>
+    <% } %>
+</body>
+
+</html>
