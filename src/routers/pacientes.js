@@ -12,4 +12,4 @@ router.get("/buscarDNI", pacienteController.buscarDNI);
 router.post("/buscarDNI", pacienteController.buscarDNI);
 
 
-export default router; //exportando el router para que pueda ser importado
+export default router; 

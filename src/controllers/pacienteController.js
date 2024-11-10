@@ -9,7 +9,8 @@ const pacienteController = {
                 return;
             }
             
-            res.render("pacientes", { data: pacientes }); // Renderiza la vista y pasa los datos de los pacientes.ejs
+            res.render("paciente", { data: pacientes }); 
+
             
         });
     },
@@ -22,7 +23,7 @@ const pacienteController = {
             if (err) {
                 console.error("Error al guardar paciente:", err);
                 req.flash("error", "Error al guardar paciente"); 
-                return res.redirect("/pacientes");
+                return res.redirect("/paciente");
             }
     
             console.log("Paciente guardado correctamente:", result);

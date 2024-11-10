@@ -17,3 +17,18 @@ npm install express morgan ejs mysql2 bcrypt express-session connect-flash expre
 14- Crear funciones para enrrutar 
 15- dev ---> src/server.js
 16- npm run dev
+
+
+
+17-grafico 
+npm install chart.js
+18- crear plantilla
+ mapeo.ejs 
+19- modificar el server y agregar la condicion 
+app.get('/mapeo', (req, res) => {
+    db.query('SELECT grupo, COUNT(*) AS total FROM pacientes GROUP BY grupo', (err, results) => {
+        if (err) throw err;
+        res.render('mapeo', { grupos: results });
+    });
+});
+

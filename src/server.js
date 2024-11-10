@@ -1,4 +1,3 @@
-// server.js
 import express from "express";
 import { Router } from "express";
 import morgan from "morgan";
@@ -7,7 +6,7 @@ import { fileURLToPath } from "url";
 import { createPool } from "mysql2";
 import session from 'express-session';
 import connectFlash from 'connect-flash';
-import pacienteRouter from "./routers/paciente.js"; //importar ruta/paciente
+import pacienteRouter from "./routers/pacientes.js"; //importar ruta/paciente
 import authRouter from "./routers/auth.js"; 
 
 
@@ -84,7 +83,13 @@ app.get("/listado", (req, res) => {
         res.render("listado", { data: pacientes, success: req.flash('success'), error: req.flash('error') });
     });
 });
-
+app.get('/mapeo', (req, res) => {
+    pool.query('SELECT grupo, COUNT(*) AS total FROM Paciente GROUP BY grupo', (err, results) => {
+        if (err) throw err;
+        console.log(results);
+        res.render('mapeo', { gruposJSON: JSON.stringify(results) }); 
+    });
+});
 app.listen(4000, () => {
     console.log('Servidor en puerto 4000');
 });

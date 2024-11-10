@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mapeo Pacientes</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link rel="icon" type="image/x-icon" href="../../assets/Logo_Ministerio_de_Salud_-_Argentina.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Roboto+Condensed:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <div class="logo">
+            <img src="../../assets/logo-SantaRosa.png" alt="">
+        </div>
+        <nav>
+            <ul>
+                <li><a href="/buscarDNI">Buscar</a></li>
+                <li><a href="/pacientes">Ingresar paciente</a></li>
+                <li><a href="/listado">Listado</a></li>
+                <li><a href="#">Mapeo</a></li>
+            </ul>
+        </nav>
+    </header>
+    <h1>Pacientes por Grupo de Riesgo:</h1>
+    <div style="display: flex; justify-content: center; align-items: center; height: 50vh;">
+        <div style="width: 400px; height: 400px;">
+            <canvas id="myChart"></canvas>
+        </div>
+    </div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+     const grupos = JSON.parse('<%- gruposJSON %>'); 
+    console.log(grupos);
+
+    const data = {
+        labels: grupos.map(g => g.grupo),
+        datasets: [{
+            label: 'Cantidad de Pacientes',
+            data: grupos.map(g => g.total),
+            backgroundColor: ['#addf76', '#d782a0', '#8b81a5'],
+            borderColor: ['#2f4858', '#9e4f6d', '#494454'],
+            borderWidth: 1
+        }]
+    };
+
+    const config = {
+        type: 'pie',
+        data: data,
+        options: {
+            responsive: true, 
+            aspectRatio: 1,   
+            plugins: {
+                legend: {
+                    position: 'top',  
+                }
+            }
+        }
+    };
+    const ctx = document.getElementById('myChart');
+    new Chart(ctx, config);
+
+</script>
+
+    <footer>
+        <div class="conteiner-footer">
+            <div class="secciones">
+                <p>Enlaces</p>
+                <ul>
+                    <li><a href="/buscarDNI">Buscar Paciente</a></li>
+                    <li><a href="/pacientes">Guardar Paciente</a></li>
+                    <li><a href="/listado">Listado de Pacientes</a></li>
+                </ul>
+            </div>
+            <div class="contacto">
+                <a href="https://maps.app.goo.gl/Z773iXjznfrX6dmP6" target="_blank">
+                    <img src="../../assets/ubicacionSantarosa.png" alt="Ícono de Google Maps">
+                </a>
+                <a href="mailto:contacto@santarosamendoza.gob.ar" target="_blank">
+                    <img src="../../assets/emailSantarosa(2).png" alt="Ícono de email">
+                </a>
+                <a class="iconoW" href="https://wa.me/+5492634332587" target="_blank">
+                    <img src="../../assets/whatsappSantarosa.webp" alt="Ícono de WhatsApp">
+                </a>
+            </div>
+            <div class="logofooter">
+                <img src="../../assets/logo-SantaRosa.png" alt="">
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

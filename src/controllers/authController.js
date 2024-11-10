@@ -9,11 +9,12 @@ const authController = {
         const { username, name, lastname, email, password } = req.body;
         try {
             const hashedPassword = await bcrypt.hash(password, 10);
-            console.log('Contraseña hasheada:', hashedPassword);
             await pool.execute('INSERT INTO usuarios (username, name, lastname, email, password) VALUES (?, ?, ?, ?, ?)', [username, name, lastname, email, hashedPassword]);
-            req.flash("success", 'Usuario registrado exitosamente');
-            res.redirect('/login');
-        } catch (error) {
+            res.render('auth/login', {
+                messages: {
+                    success: '¡Cuenta creada con éxito!'
+                }})
+             } catch (error) {
             console.error('Error al registrar usuario:', error);
             req.flash("error", 'Error al registrar usuario');
             res.redirect('/register');
@@ -26,36 +27,36 @@ const authController = {
     postLogin: async (req, res) => {
         const { username, password } = req.body;
         try {
-            const [rows] = await pool.execute('SELECT * FROM usuarios WHERE username = ?', [username]);
+            const result = await pool.promise().execute('SELECT * FROM usuarios WHERE username = ?', [username]);
+            console.log('Resultado completo:', result);  
+            const rows = result[0]; 
+            console.log('Filas:', rows); 
+        
             if (!Array.isArray(rows) || rows.length === 0) {
                 req.flash("error", 'Usuario no encontrado');
                 return res.redirect('/login');
             }
+        
             const user = rows[0];
-            console.log('Usuario encontrado:', user); 
+            console.log('Usuario encontrado:', user);
+        
             const isPasswordValid = await bcrypt.compare(password, user.password);
+            console.log('Contraseña válida:', isPasswordValid);  
+
             if (!isPasswordValid) {
-                req.flash("error", 'Contraseña incorrecta');
-                return res.redirect('/login');
-            }
+            req.flash("error", 'Contraseña incorrecta');
+            return res.redirect('/login');
+}
+        
             req.session.userId = user.id;
             req.flash("success", 'Inicio de sesión exitoso');
-            res.redirect('/pacientes'); 
+            return res.redirect('/pacientes');
         } catch (error) {
             console.error('Error al iniciar sesión:', error);
             req.flash("error", 'Error al iniciar sesión');
             res.redirect('/login');
         }
-    },
-    logout: (req, res) => {
-        req.session.destroy((err) => {
-            if (err) {
-                console.log('Error al cerrar sesión:', err);
-            } else {
-                res.redirect('/login');
-            }
-        });
     }
-};
+    };
 
 export default authController;
