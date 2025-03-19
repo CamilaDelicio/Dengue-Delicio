@@ -31,6 +31,13 @@
         <input type="number" id="dni" name="dni" placeholder="Ingrese el numero de DNI" required>
         <button type="submit">Buscar</button>
     </form>
+    <% if (mensaje) { %>
+        <p style="color: red;"><%= mensaje %></p>
+    <% } %>
+
+    <% if (error) { %>
+        <p style="color: red;"><%= error %></p>
+    <% } %>
     <footer>
         <div class="conteiner-footer">
             <div class="secciones">

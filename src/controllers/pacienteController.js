@@ -15,7 +15,6 @@ const pacienteController = {
         });
     },
     save: (req, res) => {
-        console.log(req.body);
         const data = req.body;
         data.fecha = new Date(); 
     
@@ -27,10 +26,10 @@ const pacienteController = {
             }
     
             console.log("Paciente guardado correctamente:", result);
-            req.flash("success", 'Paciente guardado exitosamente');
+            req.flash('success', 'Paciente guardado exitosamente');
     
             // Asegúrate de que el mensaje se ha establecido
-            console.log("Mensaje de éxito:", req.flash('success')); // Debugging
+            console.log("Mensaje de éxito:", req.flash('success'));
             res.redirect("/listado"); 
         });
     },
@@ -50,14 +49,13 @@ const pacienteController = {
         });
     },
     eliminar: (req, res) => {
-        const dni = req.params.dni; // Usar req.params para obtener el DNI desde la URL
+        const dni = req.params.dni; 
         pool.query("DELETE FROM Paciente WHERE dni = ?", [dni], (err, result) => {
             if (err) {
                 console.error('Error al eliminar paciente:', err);
                 req.flash('error', 'Error al eliminar paciente');
                 return res.redirect("/listado"); // Redirigir si hay un error
             } else {
-                console.log('Paciente eliminado correctamente', result);
                 req.flash('success', 'Paciente eliminado correctamente');
                 res.redirect("/listado"); // Redirigir a la lista después de eliminar
             }
@@ -65,12 +63,18 @@ const pacienteController = {
     },
     buscarDNI: (req, res) => {
         const dni = req.body.dni;
+
+        if (!dni) {
+            // Si el DNI no es enviado, no mostramos ningún mensaje
+            return res.render("buscarDNI", { mensaje: null, error: null });
+        }
+
         pool.query("SELECT * FROM Paciente WHERE dni = ?", [dni], (err, pacientes) => {
             if (err) {
                 console.error('Error al buscar paciente por DNI:', err);
-                res.render("buscarDNI", { error: "Ocurrió un error al buscar el paciente por DNI" });
+                res.render("buscarDNI", { error: "Ocurrió un error al buscar el paciente por DNI", mensaje:null });
             } else if (pacientes.length === 0) {
-                res.render("buscarDNI", { error: "No se encontró ningún paciente con ese DNI" });
+                res.render("buscarDNI", { mensaje: "No se encontró ningún paciente con ese DNI", error: null });
             } else {
                 console.log("Pacientes encontrados:", pacientes);
                 res.render("listado", { data: pacientes });
