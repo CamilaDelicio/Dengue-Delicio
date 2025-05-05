@@ -65,8 +65,18 @@ router.get('/vista',(req, res) => {
 
 // Definir rutas adicionales si es necesario
 app.get('/', (req, res) => {
-    res.render("auth/login", { messages: req.flash() });
-});
+    // Si estás usando flash messages, obtén los mensajes
+    const successMessage = req.flash('success');
+    const errorMessage = req.flash('error');
+    
+    // Renderiza la vista y pasa los mensajes si existen
+    res.render('auth/login', {
+      messages: {
+        success: successMessage.length > 0 ? successMessage[0] : null,
+        error: errorMessage.length > 0 ? errorMessage[0] : null
+      }
+    });
+  });
 app.get('/editar', (req, res) => {
     res.render("editar");
 });
