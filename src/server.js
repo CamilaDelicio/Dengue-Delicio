@@ -65,7 +65,7 @@ router.get('/vista',(req, res) => {
 
 // Definir rutas adicionales si es necesario
 app.get('/', (req, res) => {
-    res.send('Hola Mundo!!!')
+    res.render("login")
 });
 app.get('/editar', (req, res) => {
     res.render("editar");
