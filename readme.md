@@ -10,7 +10,7 @@ Además, el sistema ofrece graficar el número de pacientes según el grupo de s
 Los usuarios pueden añadir nuevos pacientes, actualizar los registros existentes y realizar consultas .
 ## 🛠️ Tecnologías utilizadas
 - 💻 JavaScript
-- 📋 EJS:
+- 📋 EJS
 - 🌐 Node.js
 - 🗃️ MySQL
 - 🌐 HTML
