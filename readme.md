@@ -8,7 +8,7 @@ B: Moderado.<br/>
 C: Leve.<br/>
 Además, el sistema ofrece graficar el número de pacientes según el grupo de síntomas, lo que facilita la visualización de la gravedad de los casos y la situación sanitaria del departamento mendocino.
 Los usuarios pueden añadir nuevos pacientes, actualizar los registros existentes y realizar consultas .
-## Tecnologías utilizadas
+## 🛠️ Tecnologías utilizadas
 - 💻 JavaScript
 - 📋 EJS:
 - 🌐 Node.js
